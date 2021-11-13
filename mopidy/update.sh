@@ -18,8 +18,8 @@ git pull
 ./build.sh
 docker push nickll/snapcast-client:raspbian
 
-cd /home/pi/jukebox/
+cd /home/pi/jukebox/jukebox-meta/mopidy
 docker-compose down
 docker-compose up -d
 
-echo "Ran mopidy update script at $(timedate)" > /home/pi/jukebox/update-timestamp.txt
+echo "Ran mopidy update script at $(date)." > /home/pi/jukebox/update-timestamp.txt
