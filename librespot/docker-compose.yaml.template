@@ -1,0 +1,40 @@
+version: "3"
+services:
+  librespot:
+    image: nickll/librespot
+    container_name: librespot
+    restart: unless-stopped
+    depends_on:
+      - snapcast-server
+    ports:
+      - 5353:5353
+    environment:
+      SPOTIFY_NAME: "Snapcast" 
+      SPOTIFY_USER: "<user>"
+      SPOTIFY_PASSWORD: "<password>"
+      INIT_VOLUME: "50"
+    volumes:
+      - /tmp/librespot:/data
+  snapcast-server:
+    image: nickll/snapcast-server:raspbian
+    container_name: snapcast-server
+    restart: unless-stopped
+    ports:
+      - 1704:1704
+      - 1705:1705
+      - 1780:1780
+    volumes:
+      - /tmp/librespot:/tmp
+      - /home/pi/jukebox/snapcast-server-docker/snapserver.conf:/etc/snapserver.conf 
+  snapcast-client:
+    image: nickll/snapcast-client:raspbian
+    container_name: snapcast-client
+    restart: unless-stopped
+    depends_on:
+      - snapcast-server
+    devices:
+      - /dev/snd
+    environment:
+      - HOST=jukebox
+    
+
