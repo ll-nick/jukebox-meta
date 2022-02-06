@@ -20,6 +20,7 @@ docker push nickll/snapcast-client:raspbian
 
 cd /home/pi/jukebox/jukebox-meta/librespot
 docker-compose down
+docker image prune --force
 docker-compose up -d
 
 echo "Ran librespot update script at $(date)." > /home/pi/jukebox/update-timestamp.txt
