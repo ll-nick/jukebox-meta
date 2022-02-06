@@ -49,5 +49,4 @@ services:
       - /dev/snd
     environment:
       - HOST=jukebox
-    
-
+      - ID=<MAC-ADRESS>
