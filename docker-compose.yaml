@@ -7,10 +7,12 @@ services:
     depends_on:
       - snapcast-server
     environment:
-      SPOTIFY_NAME: "Snapcast" 
-      SPOTIFY_USER: "<user>"
-      SPOTIFY_PASSWORD: "<password>"
-      INIT_VOLUME: "50"
+      SPOTIFY_NAME: "Home Bassistant" 
+      SPOTIFY_USER: "spotify@le-large.net"
+      SPOTIFY_PASSWORD: "^Vn5N7HuUt#p&NNr"
+      INIT_VOLUME: "100"
+    stdin_open: true
+    tty: true
     volumes:
       - /tmp/librespot-nick:/data
   librespot-anjana:
@@ -21,15 +23,19 @@ services:
       - snapcast-server
     environment:
       SPOTIFY_NAME: "Snapcast"
-      SPOTIFY_USER: "<user2>"
-      SPOTIFY_PASSWORD: "<password2>"
-      INIT_VOLUME: "50"
+      SPOTIFY_USER: "anjanaebner@aol.com"
+      SPOTIFY_PASSWORD: "Bahnhofspotify93!"
+      INIT_VOLUME: "100"
+    stdin_open: true
+    tty: true
     volumes:
       - /tmp/librespot-anjana:/data
   snapcast-server:
     image: nickll/snapcast-server:raspbian
     container_name: snapcast-server
     restart: unless-stopped
+    stdin_open: true
+    tty: true
     ports:
       - 1704:1704
       - 1705:1705
@@ -43,10 +49,12 @@ services:
     image: nickll/snapcast-client:raspbian
     container_name: snapcast-client
     restart: unless-stopped
+    stdin_open: true
+    tty: true
     depends_on:
       - snapcast-server
     devices:
       - /dev/snd
     environment:
-      - HOST=jukebox
-      - ID=<MAC-ADRESS>
+      - HOST=192.168.0.85
+      - ID=b8:27:eb:1a:40:19
